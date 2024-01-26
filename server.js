@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.json('hello fen')
+  res.json('hello my fen')
 })
 
 app.use("/api/", router);
