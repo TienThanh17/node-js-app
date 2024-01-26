@@ -17,6 +17,6 @@ app.get('/', (req, res) => {
 
 app.use("/api/", router);
 
-app.listen(5000, () => {
+app.listen(process.env.PORT, () => {
   console.log(`server start at port ${port}`);
 });
