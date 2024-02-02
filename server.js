@@ -19,6 +19,10 @@ mongoose
   .then(() => console.log("MongoDB Connected!"));
 
 
+app.get('/', (req, res) => {
+  res.send('/v1/author to get data')
+})
+
 app.use("/v1/author", authorRouter);
 app.use("/v1/book", bookRouter);
 
