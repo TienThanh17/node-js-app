@@ -1,22 +1,28 @@
 const express = require("express");
-const router = require("./apiRouter");
 var bodyParser = require("body-parser");
+const morgan = require("morgan");
+const mongoose = require("mongoose");
+require("dotenv").config();
+const authorRouter = require("./routes/author");
+const bookRouter = require("./routes/book");
 
 const app = express();
 const port = 5000;
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-
 // parse application/json
 app.use(bodyParser.json());
+app.use(morgan("common"));
 
-app.get('/', (req, res) => {
-  res.json('hello my fen')
-})
+mongoose
+  .connect(process.env.MONGODB_URL)
+  .then(() => console.log("MongoDB Connected!"));
 
-app.use("/api/", router);
 
-app.listen(process.env.PORT, () => {
+app.use("/v1/author", authorRouter);
+app.use("/v1/book", bookRouter);
+
+
+app.listen(process.env.PORT || port, () => {
   console.log(`server start at port ${port}`);
 });
