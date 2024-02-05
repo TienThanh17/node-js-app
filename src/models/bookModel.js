@@ -18,26 +18,6 @@ const bookSchema = new mongoose.Schema(
   }
 );
 
-const authorSchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
-    year: Number,
-    books: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Book",
-      },
-    ],
-  },
-  {
-    collection: "authors",
-  }
-);
-
 const Book = mongoose.model("Book", bookSchema);
-const Author = mongoose.model("Author", authorSchema);
 
-module.exports = { Book, Author };
+module.exports = Book;
