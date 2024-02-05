@@ -1,4 +1,6 @@
-const { Author, Book } = require("../model/model");
+// const { Author, Book } = require("../model/model");
+const Book = require("../model/bookModel");
+const Author = require("../model/authorModel");
 
 const bookController = {
   //ADD A BOOK
