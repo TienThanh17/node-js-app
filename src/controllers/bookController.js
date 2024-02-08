@@ -21,7 +21,20 @@ const bookController = {
   //GET ALL BOOKS
   getAllBooks: async (req, res) => {
     try {
-      const books = await Book.find().populate("author");
+      const PAGE_SIZE = 2;
+      var page = parseInt(req.query.page);
+      if (page) {
+        if ((page === "NaN" || page < 1)) {
+          page = 1;
+        }
+        var skip_quantity = (page - 1) * PAGE_SIZE;
+        var books = await Book.find()
+          .skip(skip_quantity)
+          .limit(PAGE_SIZE)
+          .populate("author");
+      } else {
+        var books = await Book.find().populate("author");
+      }
       res.status(200).json(books);
     } catch (error) {
       res.status(500).json(error);
